@@ -8,7 +8,8 @@ const Login = () => {
   const [userPassword, setUserPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleLoginSubmit = async () => {
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
     try {
       dispatch(loginThunk({ userName, userPassword }));
       navigate("/private/home")

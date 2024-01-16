@@ -11,10 +11,20 @@ const api = axios.create({
   },
 });
 export const login = async ({ userName, userPassword }) => {
-
+  console.log('ad',{
+    userName,
+    userPassword,
+  });
   const response = await api.post("/signin", {
     userName,
     userPassword,
   });
+  return response;
+};
+
+
+export const signup = async (userDetails) => {
+
+  const response = await api.post("/signup", userDetails);
   return response;
 };

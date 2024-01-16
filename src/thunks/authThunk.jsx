@@ -11,3 +11,13 @@ export const loginThunk = createAsyncThunk(
         return user.data;
     }
 );
+
+export const signinThunk = createAsyncThunk(
+    "user/signup", async (credentials) => {
+        const user = await authService.signup(credentials);
+        if (user.code === 403) {
+            throw new Error("Username/ Password Incorrect");
+        }
+        return user.data;
+    }
+);

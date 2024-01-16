@@ -1,5 +1,45 @@
+import { useState } from "react";
 import LoanBuddyLogin from "../../assets/loanBuddyLoginImage.jpg";
+import { useDispatch } from "react-redux";
+import { signinThunk } from "../../thunks/authThunk";
+import { useNavigate } from "react-router";
+
 const SignUp = () => {
+  const [userName, setUserName] = useState("");
+  const [userFirstName, setUserFirstName] = useState("");
+  const [userLastName, setUserLastName] = useState("");
+  const [userAge, setUserAge] = useState(null);
+  const [userPhoneNumber, setUserPhoneNumber] = useState(null);
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userCountryName, setUserCountryName] = useState("");
+  const dispatch = useDispatch();
+  const userRole = "USER";
+  const navigate = useNavigate();
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    const user = {
+      userName:userName,
+      userFirstName:userFirstName,
+      userLastName:userLastName,
+      userAge:userAge,
+      userPhoneNumber:userPhoneNumber,
+      userEmail:userEmail,
+      userPassword:userPassword,
+      userCountryName:userCountryName,
+      userRole:userRole
+    };
+    try {
+      dispatch(
+        signinThunk(user)
+      );
+      alert("SUCCESSFULLY SIGNED IN")
+      navigate("/users/login");
+    } catch (e) {
+      alert("Couldn't sign up", e);
+    }
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
       <div className="w-1/2 bg-cover">
@@ -9,134 +49,140 @@ const SignUp = () => {
           className="object-cover w-full h-full"
         />
       </div>
-
-      {/* Right Column - Login Form */}
       <div className="w-1/2 flex justify-center items-center">
         <div className="w-full max-w-md bg-white p-8 rounded shadow-md">
-          <h2 className="text-2xl font-bold mb-6 text-center">Login Form</h2>
-          <form>
+          <h2 className="text-2xl font-bold mb-6 text-center">Register Form</h2>
+          <form onSubmit={handleSignUp}>
             <div className="mb-2">
               <label
-                htmlFor="username"
+                htmlFor="userName"
                 className="block text-sm font-medium text-gray-600"
               >
                 Username:
               </label>
               <input
                 type="text"
-                id="username"
-                name="username"
+                id="userName"
+                name="userName"
                 className="mt-1 p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
 
             <div className="mb-2">
               <label
-                htmlFor="firstName"
+                htmlFor="userFirstName"
                 className="block text-sm font-medium text-gray-600"
               >
                 First Name:
               </label>
               <input
                 type="text"
-                id="firstName"
-                name="firstName"
+                id="userFirstName"
+                name="userFirstName"
                 className="mt-1 p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
+                onChange={(e) => setUserFirstName(e.target.value)}
               />
             </div>
 
             <div className="mb-2">
               <label
-                htmlFor="lastName"
+                htmlFor="userLastName"
                 className="block text-sm font-medium text-gray-600"
               >
                 Last Name:
               </label>
               <input
                 type="text"
-                id="lastName"
-                name="lastName"
+                id="userLastName"
+                name="userLastName"
                 className="mt-1 p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
+                onChange={(e) => setUserLastName(e.target.value)}
               />
             </div>
 
-
             <div className="mb-2">
               <label
-                htmlFor="email"
+                htmlFor="userEmail"
                 className="block text-sm font-medium text-gray-600"
               >
-                Email:
+                Email
               </label>
               <input
                 type="email"
-                id="email"
-                name="email"
+                id="userEmail"
+                name="userEmail"
                 className="mt-1 p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
+                onChange={(e) => setUserEmail(e.target.value)}
               />
             </div>
 
             <div className="mb-2">
               <label
-                htmlFor="age"
+                htmlFor="userAge"
                 className="block text-sm font-medium text-gray-600"
               >
                 Age:
               </label>
               <input
                 type="number"
-                id="age"
-                name="age"
+                id="userAge"
+                name="userAge"
                 className="mt-1 p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
+                onChange={(e) => setUserAge(e.target.value)}
               />
             </div>
 
             <div className="mb-2">
               <label
-                htmlFor="password"
+                htmlFor="userPassword"
                 className="block text-sm font-medium text-gray-600"
               >
                 Password:
               </label>
               <input
                 type="password"
-                id="password"
-                name="password"
+                id="userPassword"
+                name="userPassword"
                 className="mt-1 p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
+                onChange={(e) => setUserPassword(e.target.value)}
               />
             </div>
             <div className="mb-2">
               <label
-                htmlFor="country"
+                htmlFor="userCountryName"
                 className="block text-sm font-medium text-gray-600"
               >
                 Country:
               </label>
               <input
                 type="text"
-                id="country"
-                name="country"
+                id="userCountryName"
+                name="userCountryName"
                 className="mt-1 p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
+                onChange={(e) => setUserCountryName(e.target.value)}
               />
             </div>
 
             <div className="mb-2">
               <label
-                htmlFor="phoneNumber"
+                htmlFor="userPhoneNumber"
                 className="block text-sm font-medium text-gray-600"
               >
                 Phone Number:
               </label>
               <input
                 type="tel"
-                id="phoneNumber"
-                name="phoneNumber"
+                id="userPhoneNumber"
+                name="userPhoneNumber"
                 className="mt-1 p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
+                onChange={(e) => setUserPhoneNumber(e.target.value)}
               />
             </div>
 
             <button
               type="submit"
+              value="Register"
               className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300"
             >
               Submit

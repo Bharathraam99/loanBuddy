@@ -4,6 +4,7 @@ import AuthProvider from "./provider/authProvider";
 import MasterRouter from "./router/MasterRouter";
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./reducers/authReducer";
+import { LoadingProvider } from "./hooks/useLoading";
 function App() {
   const store = configureStore({
     reducer: {
@@ -14,7 +15,9 @@ function App() {
     <div>
       <Provider store={store}>
       <AuthProvider>
+        <LoadingProvider>
         <MasterRouter />
+        </LoadingProvider>
       </AuthProvider>
       </Provider>
 
