@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLoading } from "../hooks/useLoading";
 import Loading from "../components/Loading";
 import { moneyTransferThunk } from "../thunks/bankThunk";
-const HomePage = () => {
+const BankTransfer = () => {
   const userDetails = useSelector((state) => state.auth.currentUser);
   const [toUserNameTransfer, setToUserNameTransfer] = useState("");
   const [transferAmount, setTransferAmount] = useState(null);
   const [transactionDescription, setTransactionDescription] = useState("");
   const loadingFlag = useSelector((state) => state.auth.loadingFlag);
+  const sessionTransactions = useSelector((state) => state.auth.transactions)
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const handleTransfer = async (e) => {
@@ -19,8 +20,6 @@ const HomePage = () => {
         amount: transferAmount,
         description: transactionDescription,
       };
-      console.log('f-i');
-      console.log(token);
       dispatch(moneyTransferThunk({ transferDetails, token }));
     } catch (e) {
       alert(e);
@@ -80,4 +79,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default BankTransfer;

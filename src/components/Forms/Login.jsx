@@ -12,7 +12,7 @@ const Login = () => {
     e.preventDefault();
     try {
       dispatch(loginThunk({ userName, userPassword }));
-      navigate("/private/home")
+      navigate("/private/")
     } catch (e) {
       alert(e);
     }
